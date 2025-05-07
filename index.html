@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Respond Squad - Colorful Esports</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF4D80; /* Vibrant Pink */
+            --secondary: #6E45E2; /* Purple */
+            --accent: #00C9FF; /* Cyan */
+            --yellow: #FFD166; /* Sunny Yellow */
+            --green: #06D6A0; /* Mint Green */
+            --dark: #1A1A2E; /* Dark Blue */
+            --light: #FDFDFD; /* White */
+            --text: #333333; /* Dark Gray */
+            --text-light: #ecf0f1; /* Light Gray */
+            --text-muted: #bdc3c7; /* Muted Gray */
+            --card-bg: #2A2A4A; /* Dark Card Background */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Container for centering content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Rainbow Gradient Animation */
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Header with Animated Gradient - FIXED */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            background-size: 300% 300%;
+            animation: rainbow 8s ease infinite;
+            color: white;
+            text-align: center;
+            padding: 150px 20px 100px; /* Adjusted padding */
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-top: 70px; /* Space for fixed nav */
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .squad-name {
+            font-size: clamp(2.5rem, 8vw, 4rem); /* Responsive font size */
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            animation: fadeInDown 1s ease, float 4s ease-in-out infinite;
+        }
+
+        .tagline {
+            font-size: clamp(1.2rem, 4vw, 1.8rem); /* Responsive font size */
+            font-weight: 300;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .welcome-message {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            line-height: 1.8;
+            opacity: 0.9;
+            animation: fadeIn 2s ease;
+        }
+
+        /* Button with Pulse Animation */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--yellow);
+            color: var(--dark);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 30px;
+            box-shadow: 0 10px 20px rgba(255,209,102,0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255,209,102,0.6);
+            animation: none;
+        }
+
+        /* Navigation with Colorful Hover - FIXED */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(26, 26, 46, 0.95);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+            color: var(--text);
+            font-size: 1.2rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Hierarchy Section */
+        .hierarchy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        .member-role {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 77, 128, 0.2);
+            color: var(--text-light);
+        }
+
+        .member-role::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .member-role:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(255, 77, 128, 0.5);
+        }
+
+        .member-role img {
+            width: 180px;
+            height: 180px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            display: block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            border: 3px solid var(--primary);
+        }
+
+        .member-role:hover img {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+
+        .role-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 15px 0 5px;
+            color: var(--accent);
+            transition: color 0.3s ease;
+        }
+
+        .member-name {
+            font-size: 1.1rem;
+            color: var(--yellow);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .member-role p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            background-size: 300% 300%;
+            animation: rainbow 8s ease infinite;
+            padding: 80px 20px;
+            text-align: center;
+            clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+            margin: 80px 0;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px 20px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Profiles Section */
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+
+        .member-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            width: 100%;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 77, 128, 0.2);
+            color: var(--text-light);
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(255, 77, 128, 0.5);
+        }
+
+        .member-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .member-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .member-info {
+            padding: 25px;
+        }
+
+        .member-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+            transition: color 0.3s ease;
+        }
+
+        .member-card:hover .member-info h3 {
+            color: var(--yellow);
+        }
+
+        .member-info p {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        /* Member Social */
+        .member-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: var(--dark);
+        }
+
+        .social-icon.instagram:hover {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .social-icon.twitch:hover {
+            background-color: #6441a5;
+        }
+
+        .social-icon.youtube:hover {
+            background-color: #FF0000;
+        }
+
+        .social-icon.twitter:hover {
+            background-color: #1DA1F2;
+        }
+
+        /* Achievements Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .achievement-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 77, 128, 0.2);
+            color: var(--text-light);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border-color: rgba(255, 77, 128, 0.5);
+        }
+
+        .achievement-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--yellow);
+        }
+
+        .achievement-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            aspect-ratio: 1/1;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Basecamp Section */
+.basecamp-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.basecamp-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.basecamp-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--secondary);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.basecamp-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 3px;
+}
+
+.basecamp-address {
+    margin-bottom: 25px;
+}
+
+.address-link {
+    color: var(--text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+}
+
+.address-link:hover {
+    color: var(--primary);
+}
+
+.map-icon {
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+.basecamp-description {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.facilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.facility-item {
+    text-align: center;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.facility-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.facility-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.wifi-icon {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+.coffee-icon {
+    background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+}
+
+.game-icon {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.map-icon {
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+}
+
+.basecamp-gallery {
+    flex: 1;
+    min-width: 300px;
+    display: grid;
+    gap: 20px;
+}
+
+.basecamp-gallery .gallery-item {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    aspect-ratio: 16/9;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.basecamp-gallery .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.basecamp-gallery .gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.basecamp-gallery .gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.basecamp-gallery .gallery-item:hover::after {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .basecamp-content {
+        flex-direction: column;
+    }
+    
+    .facilities-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+    
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .info-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+
+        .info-details p a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .info-details p a:hover {
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(189, 195, 199, 0.5);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 77, 128, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--text-light);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--yellow), var(--green));
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 5px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-social a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .footer-links a::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-light);
+        }
+
+        .footer-links a:hover::before {
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(236, 240, 241, 0.1);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Role Tags */
+        .role-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .role-tag.leader {
+            background-color: var(--primary);
+        }
+
+        .role-tag.jungler {
+            background-color: var(--green);
+        }
+
+        .role-tag.marksman {
+            background-color: var(--yellow);
+        }
+
+        .role-tag.tank {
+            background-color: var(--secondary);
+        }
+
+        .role-tag.mage {
+            background-color: var(--accent);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            header {
+                padding: 120px 20px 80px;
+                margin-top: 60px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section {
+                padding: 80px 20px;
+            }
+
+            .contact-form, .contact-info {
+                flex: 100%;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .footer-column {
+                flex: 100%;
+                text-align: center;
+            }
+
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-container">
+        <a href="#" class="logo"><i class="fas fa-bolt"></i> FRS</a>
+        <ul class="nav-links">
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#about">Tentang</a></li>
+            <li><a href="#team">Tim</a></li>
+            <li><a href="#achievements">Prestasi</a></li>
+            <li><a href="#gallery">Galeri</a></li>
+            <li><a href="#basecamp">Basecamp</a></li>
+            <li><a href="#contact">Kontak</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Header -->
+<header id="home">
+    <div class="container">
+        <h1 class="squad-name">FAST RESPOND SQUAD</h1>
+        <p class="tagline">Fast Hands. Sharp Minds. One Vision.</p>
+        <div class="welcome-message">
+            Kami adalah tim esports Mobile Legends penuh warna yang membawa energi dan kreativitas ke setiap pertandingan.
+            Bergabunglah dengan perjalanan penuh warna kami menuju puncak kompetisi!
+        </div>
+        <a href="#contact" class="cta-button">JOIN THE SQUAD</a>
+    </div>
+</header>
+
+<!-- About Section -->
+<section class="section" id="about">
+    <div class="container">
+        <h2 class="section-title">Tentang Kami</h2>
+        <p class="section-subtitle">Kenali lebih dalam tim esports dengan semangat dan kreativitas tinggi</p>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <h3 style="font-size: 2rem; margin-bottom: 20px; color: var(--secondary);">Siapa Kami? We Are who We Are</h3>
+                <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                    Fast Respond Squad (FRS) adalah tim esports Mobile Legends profesional yang didirikan pada 2020. Kami menggabungkan 
+                    keahlian teknis dengan kreativitas taktik untuk menciptakan gaya bermain yang unik dan mencolok.
+                </p>
+                <p style="margin-bottom: 30px; font-size: 1.1rem;">
+                    Misi kami adalah membangun komunitas gaming yang positif dan inspiratif melalui permainan strategis,
+                    konten kreatif, dan interaksi yang bermakna dengan penggemar.
+                </p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+                    <div style="background: rgba(255,77,128,0.1); padding: 20px; border-radius: 10px; border-left: 4px solid var(--primary);">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Visi Kami</h4>
+                        <p>Menginspirasi generasi gamer melalui permainan berwarna dan inovatif</p>
+                    </div>
+                    
+                    <div style="background: rgba(110,69,226,0.1); padding: 20px; border-radius: 10px; border-left: 4px solid var(--secondary);">
+                        <h4 style="color: var(--secondary); margin-bottom: 10px;">Misi Kami</h4>
+                        <p>Menciptakan ekosistem esports yang dinamis dan inklusif</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-image">
+                <img src="images/128.png" alt="Team Playing MLBB">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Hierarchy Section -->
+<section class="section" id="hierarchy" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="section-title">The Founder</h2>
+        <p class="section-subtitle">Pemimpin yang solid dan bertanggung jawab sebagai fondasi kesuksesan kami</p>
+        
+        <div class="hierarchy-grid">
+            <!-- Leader Role -->
+            <div class="member-role">
+                <img src="images/107.jpeg" alt="Leader">
+                <h3 class="role-title">Founder and CEO</h3>
+                <h4 class="member-name">Restoe2415</h4>
+                <p>Pemimpin karismatik dengan visi permainan yang jelas dan mampu menggerakkan tim menuju kemenangan.</p>
+            </div>
+            
+            <!-- Co-Leader Role -->
+            <div class="member-role">
+                <img src="images/108.jpeg" alt="Co-Leader">
+                <h3 class="role-title">Co-Founder</h3>
+                <h4 class="member-name">Rama2415</h4>
+                <p>Tangan kanan pemimpin yang mampu mengambil keputusan strategis dan mengkoordinasi tim dengan efektif.</p>
+            </div>
+            
+            <!-- Advisor Role -->
+            <div class="member-role">
+                <img src="images/106.jpeg" alt="Advisor">
+                <h3 class="role-title">Manager</h3>
+                <h4 class="member-name">Aji2415</h4>
+                <p>Mentor dengan pengalaman luas yang memberikan wawasan taktis dan pengembangan strategi jangka panjang.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Team Members Section -->
+<section class="section" id="team">
+    <div class="container">
+        <h2 class="section-title">Anggota Tim</h2>
+        <p class="section-subtitle">Para pemain berbakat di balik kesuksesan Fast Respond Squad</p>
+        
+        <div class="profiles-grid">
+            <!-- Member 1 -->
+            <div class="member-card">
+                <img src="images/107.jpeg" alt="Restoe2415">
+                <div class="member-info">
+                    <h3>Maulana Restoe</h3>
+                    <p><span class="role-tag leader">LEADER</span> <span class="role-tag marksman">MARKSMAN/SUPPORT</span></p>
+                    <p><strong>IGN:</strong> Restoe2415</p>
+                    <p><strong>Usia:</strong> 27 tahun</p>
+                    <p><strong>Hero Utama:</strong> Bruno, Rafaela, Alice</p>
+                    <p>Kapten tim dengan kemampuan shot-calling yang tajam dan feeling yang akurat dalam setiap pertempuran.</p>
+                    
+                    <div class="member-social">
+                        <a href="https://x.com/restoe2415?t=ZriWs0pSBz15nhoQTKEB7Q&s=09" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/maulana_restoe?igsh=MThpanNubWo1aW42bw==" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 2 -->
+            <div class="member-card">
+                <img src="images/108.jpeg" alt="Rama2415">
+                <div class="member-info">
+                    <h3>Primus Ramadhan</h3>
+                    <p><span class="role-tag jungler">CO-LEADER</span> <span class="role-tag jungler">JUNGLER/ROAM</span></p>
+                    <p><strong>IGN:</strong> Rama2415</p>
+                    <p><strong>Usia:</strong> 22 tahun</p>
+                    <p><strong>Hero Utama:</strong> Yin, Hanzo, Masha</p>
+                    <p>Jungler agresif dengan insting mengambil objektif yang tajam dan kemampuan manuver yang lincah.</p>
+                    
+                    <div class="member-social">         
+                        <a href="https://www.instagram.com/rama_2415?igsh=MWxwMWxvZzd6dXpqOA==" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member 3 -->
+            <div class="member-card">
+                <img src="images/106.jpeg" alt="Rama2415">
+                <div class="member-info">
+                    <h3>Aji Santoso</h3>
+                    <p><span class="role-tag jungler">Manager Team</span> <span class="role-tag jungler">SUPPORT/ROAM</span></p>
+                    <p><strong>IGN:</strong> Aji2415</p>
+                    <p><strong>Usia:</strong> 24 tahun</p>
+                    <p><strong>Hero Utama:</strong> Rafaela, Mathilda, Hylos</p>
+                    <p>Support yang sigap memberikan suply darah kepada satu team apapun itu kondisi yang terjadi didalam permainan.</p>
+                    
+                    <div class="member-social">         
+                        <a href="https://www.instagram.com/ajisnso?igsh=dXg4dDR0dmk3dDNh" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 4 -->
+            <div class="member-card">
+                <img src="images/113.jpeg" alt="Dimas_FRS">
+                <div class="member-info">
+                    <h3>Dimas Surya Ary</h3>
+                    <p><span class="role-tag tank">JUNGLER/ALLROLE</span></p>
+                    <p><strong>IGN:</strong> Capek</p>
+                    <p><strong>Usia:</strong> 19 tahun</p>
+                    <p><strong>Hero Utama:</strong> Ling, Fanny, Granger</p>
+                    <p>Jungler andal dengan timing set yang sempurna dan kemampuan bertahan yang kuat di garis depan.</p>
+                    
+                    <div class="member-social">
+                        <a href="https://www.instagram.com/dimasury_?igsh=YXBxeGs1OGJ5Yndj" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 5 -->
+            <div class="member-card">
+                <img src="images/109.jpeg" alt="Putra_ML">
+                <div class="member-info">
+                    <h3>Zaky Zafida</h3>
+                    <p><span class="role-tag mage">EXPLANER</span></p>
+                    <p><strong>IGN:</strong> Kebal Crowd Control</p>
+                    <p><strong>Usia:</strong> 20 tahun</p>
+                    <p><strong>Hero Utama:</strong> Benedetta, Poveus, Lapu-Lapu</p>
+                    <p>Explaner dengan pemahaman rotasi yang luar biasa dan kontrol map yang memukau dalam setiap pertandingan.</p>
+                    
+                    <div class="member-social">
+                        <a href="https://www.instagram.com/z_ky14?igsh=aHhueHAzeXpidTV3" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 6 -->
+            <div class="member-card">
+                <img src="images/111.jpeg" alt="Andi_XP">
+                <div class="member-info">
+                    <h3>Adnan Faqih</h3>
+                    <p><span class="role-tag marksman">JUNGLER/ALL ROLE</span></p>
+                    <p><strong>IGN:</strong> SadeLa</p>
+                    <p><strong>Usia:</strong> 20 tahun</p>
+                    <p><strong>Hero Utama:</strong> Selena, Alucard, Lancelot</p>
+                    <p>Jungler dengan kemampuan mekanik yang presisi dan adaptasi build yang fleksibel sesuai situasi permainan.</p>
+                    
+                    <div class="member-social">
+                        <a href="https://www.instagram.com/sadellaf_?igsh=ZXNrN3Z0OHR3Y2wy" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 7 -->
+            <div class="member-card">
+                <img src="images/129.jpeg" alt="Andi_XP">
+                <div class="member-info">
+                    <h3>Fadhil Hasbi</h3>
+                    <p><span class="role-tag marksman">TANK</span></p>
+                    <p><strong>IGN:</strong> D. Luffy</p>
+                    <p><strong>Usia:</strong> 20 tahun</p>
+                    <p><strong>Hero Utama:</strong> Hylos, Tigreal, Akai</p>
+                    <p>Tank yang sangat responsif dalam memberikan backup bala bantuan.</p>
+                    
+                    <div class="member-social">
+                        <a href="https://www.instagram.com/fadhilll_hsbi?igsh=ZmQwcjhlZnEzbWRz" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Member 9 -->
+            <div class="member-card">
+                <img src="images/110.jpeg" alt="Andi_XP">
+                <div class="member-info">
+                    <h3>Rahman Nur</h3>
+                    <p><span class="role-tag marksman">TANK/MIDLANER</span></p>
+                    <p><strong>IGN:</strong> TERONG</p>
+                    <p><strong>Usia:</strong> 20 tahun</p>
+                    <p><strong>Hero Utama:</strong> Hylos, Gord, Tigrel</p>
+                    <p>Midlaner yang sangat ahli dalam hal macro gameplay.</p>
+                    
+                    <div class="member-social">
+                        <a href="https://www.instagram.com/sadellaf_?igsh=ZXNrN3Z0OHR3Y2wy" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member 10 -->
+            <div class="member-card">
+                <img src="images/130.jpeg" alt="Andi_XP">
+                <div class="member-info">
+                    <h3>Anugrah Andika</h3>
+                    <p><span class="role-tag marksman">ALL ROLE</span></p>
+                    <p><strong>IGN:</strong> KissLexus</p>
+                    <p><strong>Usia:</strong> 26 tahun</p>
+                    <p><strong>Hero Utama:</strong> Selena, Lolita, Gord</p>
+                    <p>Bisa melakukan apapun sesuai kebutuhan tim dan skill yang fleksibel sesuai situasi permainan.</p>
+                    
+                    <div class="member-social">
+                        <a href="https://www.instagram.com/anugrahandhika?igsh=MnlveGd3bnU2eGF1" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@dhikadiary?si=oUGb6EivVD0vWUih" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">45+</div>
+                <div class="stat-label">Turnamen Diikuti</div>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-number">18</div>
+                <div class="stat-label">Kejuaraan Dimenangkan</div>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-number">120K+</div>
+                <div class="stat-label">Pengikut Media Sosial</div>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Tahun Pengalaman</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Achievements Section -->
+<section class="section" id="achievements">
+    <div class="container">
+        <h2 class="section-title">Prestasi Kami</h2>
+        <p class="section-subtitle">Perjalanan penuh warna menuju puncak kompetisi</p>
+        
+        <div class="achievements-grid">
+            <!-- Achievement 1 -->
+            <div class="achievement-card">
+                <h3>Mobie Legends Champions league</h3>
+                <div class="achievement-meta">
+                    <span>November 2021</span>
+                    <span>Jakarta</span>
+                </div>
+                <p>Juara turnamen regional dengan mengalahkan 8 tim terbaik dari server local.</p>
+            </div>
+            
+            <!-- Achievement 2 -->
+            <div class="achievement-card">
+                <h3>MLBB All Stars Tournament</h3>
+                <div class="achievement-meta">
+                    <span>Juli 2022</span>
+                    <span>Tanggerang</span>
+                </div>
+                <p>Runner-up dalam turnamen berskala kota dengan partisipasi dari 32 tim terbaik.</p>
+            </div>
+            
+            <!-- Achievement 3 -->
+            <div class="achievement-card">
+                <h3>Esports Warkop League</h3>
+                <div class="achievement-meta">
+                    <span>Mei 2021</span>
+                    <span>Online</span>
+                </div>
+                <p>Juara 1 liga warkop dengan partisipasi lebih dari 100 tim se-Tanggeran Selatan.</p>
+            </div>
+            
+            <!-- Achievement 4 -->
+            <div class="achievement-card">
+                <h3>Southeast Asia Invitational</h3>
+                <div class="achievement-meta">
+                    <span>Maret 2022</span>
+                    <span>Online</span>
+                </div>
+                <p>Top 4 turnamen internasional dengan peserta dari Indonesia, Malaysia, Singapura, dan Filipina.</p>
+            </div>
+            
+            <!-- Achievement 5 -->
+            <div class="achievement-card">
+                <h3>Best Team Strategy Award</h3>
+                <div class="achievement-meta">
+                    <span>Februari 2022</span>
+                    <span>Singapore</span>
+                </div>
+                <p>Penghargaan khusus untuk inovasi taktik dan strategi drafting yang mengejutkan para analis.</p>
+            </div>
+            
+            <!-- Achievement 6 -->
+            <div class="achievement-card">
+                <h3>Community's Choice Award</h3>
+                <div class="achievement-meta">
+                    <span>Januari 2022</span>
+                    <span>Online Voting</span>
+                </div>
+                <p>Dipilih sebagai tim favorit penggemar berdasarkan voting komunitas MLBB Indonesia.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="section" id="gallery">
+    <div class="container">
+        <h2 class="section-title">Galeri</h2>
+        <p class="section-subtitle">Momen-momen tak terlupakan dalam perjalanan kami</p>
+        
+        <div class="gallery-grid">
+            <!-- Gallery Item 1 -->
+            <div class="gallery-item">
+                <img src="images/11.jpg" alt="Team Photo">
+            </div>
+            
+            <!-- Gallery Item 2 -->
+            <div class="gallery-item">
+                <img src="images/20.jpg" alt="Tournament Victory">
+            </div>
+            
+            <!-- Gallery Item 3 -->
+            <div class="gallery-item">
+                <img src="images/18.jpg" alt="Gaming Setup">
+            </div>
+            
+            <!-- Gallery Item 4 -->
+            <div class="gallery-item">
+                <img src="images/115.jpeg" alt="Gaming Setup">
+            </div>
+            
+            <!-- Gallery Item 5 -->
+            <div class="gallery-item">
+                <img src="images/102.jpeg" alt="Gaming Setup">
+            </div>
+            
+            <!-- Gallery Item 6 -->
+            <div class="gallery-item">
+                <img src="images/116.jpeg" alt="Gaming Setup">
+            </div>
+            
+            <!-- Gallery Item 7 -->
+            <div class="gallery-item">
+                <img src="images/123.jpeg" alt="Gaming Setup">
+            </div>
+            
+            <!-- Gallery Item 8 -->
+            <div class="gallery-item">
+                <img src="images/112.jpeg" alt="Gaming Setup">
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Basecamp Section -->
+<section class="section" id="basecamp" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="section-title">Basecamp Kami</h2>
+        <p class="section-subtitle">Tempat berkumpul, berdiskusi strategi, dan mempererat kekompakan tim</p>
+        
+        <div class="basecamp-content">
+            <div class="basecamp-info">
+                <h3 class="basecamp-title">Djaloe Coffee Roastery</h3>
+                <div class="basecamp-address">
+                    <a href="https://maps.app.goo.gl/FRoDZnfNb94tVe5KA" target="_blank" class="address-link">
+                        <i class="fas fa-map-marker-alt map-icon"></i>
+                        Puri Bintaro Residence 2 Blok D1 No.10, Serua Indah, Ciputat, South Tangerang City, Banten 15414
+                    </a>
+                </div>
+                <p class="basecamp-description">
+                    Sebagai tempat kami berkumpul, berdiskusi strategi, dan mempererat kekompakan tim, Djaloe Coffee Roastery menjadi bagian penting dalam perjalanan kami. 
+                    Di sinilah ide-ide besar dan momen-momen penting dalam komunitas kami tercipta.
+                </p>
+                
+                <div class="facilities-grid">
+                    <div class="facility-item">
+                        <div class="facility-icon wifi-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <p>Free WiFi</p>
+                    </div>
+                    
+                    <div class="facility-item">
+                        <div class="facility-icon coffee-icon">
+                            <i class="fas fa-coffee"></i>
+                        </div>
+                        <p>Specialty Coffee</p>
+                    </div>
+                    
+                    <div class="facility-item">
+                        <div class="facility-icon game-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <p>Gaming Zone</p>
+                    </div>
+                    
+                    <div class="facility-item">
+    <div class="facility-icon map-icon">
+        <i class="fas fa-map-marked-alt"></i>
+    </div>
+    <p>Easy Location</p>
+</div>
+                </div>
+            </div>
+            
+            <div class="basecamp-gallery">
+                <div class="gallery-item">
+                    <img src="images/122.jpeg" alt="Basecamp Interior">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/121.jpeg" alt="Gaming Setup">
+            </div>
+                <div class="gallery-item">
+                    <img src="images/120.jpeg" alt="Gaming Setup">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
+<!-- Contact Section -->
+<section class="section" id="contact" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="section-title">Hubungi Kami</h2>
+        <p class="section-subtitle">Ada pertanyaan atau ingin bergabung dengan tim? Jangan ragu untuk menghubungi kami</p>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="info-details">
+                        <h4>Lokasi</h4>
+                        <a href="https://maps.app.goo.gl/FRoDZnfNb94tVe5KA" target="_blank" class="address-link">
+                        <i class="fas fa-map-marker-alt map-icon"></i>
+                        Puri Bintaro Residence 2 Blok D1 No.10, Serua Indah, Ciputat, South Tangerang City, Banten 15414
+                    </a>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="info-details">
+                        <h4>Email</h4>
+                        <p><a href="mailto:faqiihh3@gmail.com">faqiihh3@gmail.com</a></p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="info-details">
+                        <h4>Telepon</h4>
+                        <p><a href="https://wa.me/qr/DSH22JZNJY2TH1">+62 878 8359 1482</a></p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <div class="info-details">
+                        <h4>Jam Operasional</h4>
+                        <p>Selasa - Sabtu: 10:00 - 19:00 WIB</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Nama Lengkap" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Alamat Email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Subjek">
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Pesan Anda" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="cta-button" style="border: none; cursor: pointer; width: 100%;">Kirim Pesan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Fast Respond Squad</h3>
+                <p style="margin-bottom: 20px; color: var(--text-muted);">Tim esports profesional dengan dedikasi tinggi untuk komunitas gaming Indonesia.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/sadellaf_?igsh=ZXNrN3Z0OHR3Y2wy"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com/@sadelagaming?si=JezkF0bULxpupvvf"><i class="fab fa-youtube"></i></a>
+                    <a href="https://x.com/restoe2415?t=ZriWs0pSBz15nhoQTKEB7Q&s=09"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.facebook.com/share/19LPspRPRJ/"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Tautan</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#about">Tentang Kami</a></li>
+                    <li><a href="#team">Tim Kami</a></li>
+                    <li><a href="#achievements">Prestasi</a></li>
+                    <li><a href="#gallery">Galeri</a></li>
+                    <li><a href="#basecamp">Basecamp</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Lainnya</h3>
+                <ul class="footer-links">
+                    <li><a href="https://id-mpl.com/">MLBB Profesional League</a></li>
+                    <li><a href="https://www.takapedia.com/">Fast Respond Store</a></li>
+                    <li><a href="https://www.instagram.com/sadellaf_?igsh=ZXNrN3Z0OHR3Y2wy">Creator of This Website</a></li>
+                    <li><a href="#">Soon Updated</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Fast Respond Squad. All Rights Reserved.   Designed with <i class="fas fa-heart" style="color: var(--accent-color);"></i> by AdnanFaqih member of FRS Team</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
